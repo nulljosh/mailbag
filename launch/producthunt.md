@@ -27,4 +27,4 @@ Mailbag is free right now, full stop. No paid tier exists yet. If that changes l
 Free. No paid tier exists today.
 
 ## Links
-- Web app: https://mailbag.heyitsmejosh.com
+- Web app: https://mailbag.jaybulb.com

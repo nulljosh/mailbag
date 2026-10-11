@@ -13,4 +13,4 @@ Most bulk senders already support RFC 8058 one-click unsubscribe, so it POSTs to
 
 It's free right now, no paid tier exists. Would love feedback, especially on false positives where it flags a real sender.
 
-https://mailbag.heyitsmejosh.com
+https://mailbag.jaybulb.com

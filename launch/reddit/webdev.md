@@ -13,4 +13,4 @@ Also implemented RFC 8058 one-click unsubscribe server-side (POST to `List-Unsub
 
 Free to use, no backend framework, just Workers + KV + vanilla JS on the frontend.
 
-https://mailbag.heyitsmejosh.com
+https://mailbag.jaybulb.com

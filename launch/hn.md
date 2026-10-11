@@ -11,4 +11,4 @@ It's a Cloudflare Worker backend with a web app, plus iOS and macOS wrappers tha
 
 Free today, no paid tier exists yet. Would love feedback on the scoring rules, especially false positives on real senders.
 
-https://mailbag.heyitsmejosh.com
+https://mailbag.jaybulb.com

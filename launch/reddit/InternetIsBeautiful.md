@@ -11,4 +11,4 @@ The part I think is worth sharing here: most bulk senders already support RFC 80
 
 Free to use right now.
 
-https://mailbag.heyitsmejosh.com
+https://mailbag.jaybulb.com

@@ -8,4 +8,4 @@ Most bulk senders already support one-click unsubscribe (RFC 8058) and nothing u
 
 3/
 Free to use right now, web + iOS + macOS.
-https://mailbag.heyitsmejosh.com
+https://mailbag.jaybulb.com

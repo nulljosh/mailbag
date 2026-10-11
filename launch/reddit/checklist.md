@@ -11,6 +11,6 @@ Skipped and why:
 
 Before posting, for each of the three subs above: check current self-promo day/karma/flair requirements. Ask Joshua, don't guess - these change and vary by mod team.
 
-Every post links the web app only: https://mailbag.heyitsmejosh.com. No App Store link anywhere - no approved build exists on either platform right now.
+Every post links the web app only: https://mailbag.jaybulb.com. No App Store link anywhere - no approved build exists on either platform right now.
 
 One post per sub, staggered, not all the same day.
