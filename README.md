@@ -36,7 +36,7 @@ Mailbag does that to your inbox.
 
 ## Run it
 
-Open [mailbag.heyitsmejosh.com](https://mailbag.heyitsmejosh.com) (or the iOS/macOS app), connect Gmail, triage. For the dev-tool-alert side, from a Claude Code session:
+Open [mailbag.jaybulb.com](https://mailbag.jaybulb.com) (or the iOS/macOS app), connect Gmail, triage. For the dev-tool-alert side, from a Claude Code session:
 
 ```
 /mail                 dry run — read, classify, report, touch nothing
