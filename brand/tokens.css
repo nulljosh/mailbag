@@ -1,0 +1,7 @@
+/* Mailbag brand tokens. The accent is the only colour this app owns; spacing, radii and type come from the shared system. */
+:root {
+  --accent: #d62c80;
+  --accent-light: #ff78b2;
+  --accent-deep: #d62c80;
+  --accent-ring: color-mix(in srgb, #d62c80 30%, transparent);
+}
