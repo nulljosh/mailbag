@@ -1,4 +1,7 @@
-# Mailbag loop handoff (2026-10-04, late)
+# Mailbag loop handoff (2026-10-18)
+
+**Submitted 2026-10-18:** build 202610181800 on iOS and Mac, listing renamed Mailbag, new screenshots and review notes, short reply to Apple on both threads. Both WAITING_FOR_REVIEW. Cause of the 2.1(a) rejection: the reviewed build called a retired API host, so every sign-in and the demo inbox failed. Watch review; the items below are older.
+
 
 ## What the loop is
 
