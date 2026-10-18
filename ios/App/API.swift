@@ -1,7 +1,7 @@
 import Foundation
 
 // The API stays on the host the Google callback is registered on, whatever the app is called this week.
-let apiBase = URL(string: "https://hagaki.heyitsmejosh.com")!
+let apiBase = URL(string: "https://hagaki.jaybulb.com")!
 
 /// Smart sorting sends sender, subject and a short preview to a language model on the server. On unless the user turns it off.
 var aiSortEnabled: Bool { UserDefaults.standard.object(forKey: "aiSort") as? Bool ?? true }
