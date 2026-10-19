@@ -6,4 +6,4 @@
 - Outlook needs a personal Microsoft account with its own directory. The school account cannot register apps. See docs/LOOP-HANDOFF.md.
 
 ## Ingested 2026-10-16
-- [ ] Needs iOS and macOS releases (ASC still lists Hagaki 1.0 on both, rejected).
+- [ ] Waiting on Apple for the iOS and macOS builds submitted 2026-10-18 as Mailbag (build 202610181800). Check the result in Resolution Center if either is rejected.
