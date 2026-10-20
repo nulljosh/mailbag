@@ -9,7 +9,7 @@ User signs in with Google/Microsoft/Apple OAuth (native uses system browser via 
 | File | What it owns |
 |---|---|
 | `worker.js` | Cloudflare Worker. OAuth endpoints (`/auth/start`, `/auth/callback`, `/auth/native`), message listing (`/api/messages`), actions (`/api/action`, `unsubscribe/archive/delete/organize`), bulk filing (`/api/organize`), the `categorize` rules, the `llmRefine` model pass, and `/api/sort` for mail the client read itself. Dispatches on provider (Gmail/Outlook/iCloud) to matching logic. Shared scoring rules across all three. |
-| `landing/index.html` | Inbox UI (Connect button, message list, action buttons), marketing copy, run-history panel. Loads from Worker with `?embed&native=1` for native wrappers. |
+| `landing/index.html` | Inbox UI (Connect button, message list, action buttons), marketing copy, run-history panel. No embed mode any more; the native apps do not load it. |
 | `ios/App/` | Native SwiftUI app. `SimpleInboxView` is the whole Mac window (a count and Clear inbox), `InboxView` is the iPhone and iPad list, `SettingsView` is the Mac settings window with accounts and sign out. `GoogleAuth` runs `ASWebAuthenticationSession` against Google's public PKCE client and trades tokens at `/auth/native`. `MacMail` (Debug builds only) reads Mail.app over Apple Events. |
 | `ios/project.yml` + `ios/Mailbag.xcodeproj` | xcodegen project definition. iOS + macOS targets (shared Swift code, different size constraints). |
 | `SKILL.md` | Claude Code skill for dev-tool alerting (Vercel/GitHub Actions/App Store Connect emails → filed to project). Separate from the app (requires Claude, not user-facing). |

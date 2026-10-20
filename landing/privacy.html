@@ -1,40 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mailbag: Privacy</title>
-<link rel="icon" href="icon.svg">
-<style>
-  :root{--bg:#f6f0e4;--text:#1c1814;--muted:#6f665a;}
-  @media (prefers-color-scheme: dark){:root{--bg:#15110e;--text:#f1e9da;--muted:#a39886;}}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;padding:0 20px;}
-  .wrap{max-width:640px;margin:0 auto;padding-block:64px 40px;}
-  h1{font-size:28px;margin:0 0 24px;}
-  h2{font-size:16px;margin:32px 0 8px;}
-  p{font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 16px;}
-  a{color:var(--text);}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mailbag Privacy</title>
+<meta name="description" content="What Mailbag reads, what it stores and what it never does.">
+<meta name="theme-color" content="#fdfdfd" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#001f3f" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mailbag.jaybulb.com/privacy">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="landing.css">
 </head>
 <body>
-<div class="wrap">
-<h1>Privacy</h1>
-<p>Mailbag connects to your Gmail account with your permission (Google Sign-In) to read, score, and act on messages in your inbox. For iCloud it uses an app-specific password you create. To sort machine mail its rules cannot place, Mailbag sends the sender, subject and a short preview of those messages to a language model running on Cloudflare, the same company that hosts Mailbag. Mail that shows no sign of a machine, which is how Mailbag recognises a person, is never sent to the model. Nothing else about your mail leaves Mailbag and your mail provider.</p>
 
-<h2>What Mailbag accesses</h2>
-<p>Message headers and bodies in your Gmail inbox, to score and display them. Labels and folders. When you press File, Mailbag creates a folder called Mailbag with seven folders under it (Gmail labels or iCloud folders) and moves mail there. It also archives or deletes when you ask. Deleting in Gmail moves mail to Trash. It never sends outbound mail on your behalf.</p>
+<header class="nav" aria-label="Site">
+  <nav class="nav-links" aria-label="Main">
+    <a href="/#features">Features</a>
+    <a href="/#more">More</a>
+  </nav>
+  <a class="nav-brand" href="/" aria-label="Mailbag home"><img src="icon.svg" alt="" width="28" height="28"><span>Mailbag</span></a>
+  <div class="nav-end">
+    <a class="nav-get" href="https://github.com/nulljosh/mailbag">Source</a>
+    <a class="btn btn-solid" href="/#inbox">Try it</a>
+  </div>
+</header>
 
-<h2>What Mailbag stores</h2>
-<p>An OAuth access/refresh token, encrypted at rest in Cloudflare KV, so you don't have to reconnect every visit. No message content is stored — inbox data is read live from Gmail each time you open the app and discarded after rendering. Mailbag keeps no copy of what it sends to the model.</p>
+<main>
+<article class="privacy">
+    <section>
+      <p class="label">Privacy</p>
+      <h1>Your mail stays yours</h1>
+      <p><em>Last updated October 20, 2026.</em></p>
+      <p>Mailbag connects to your Gmail account with your permission (Google Sign-In) to read, score, and act on messages in your inbox. For iCloud it uses an app-specific password you create. To sort machine mail its rules cannot place, Mailbag sends the sender, subject and a short preview of those messages to a language model running on Cloudflare, the same company that hosts Mailbag. Mail that shows no sign of a machine, which is how Mailbag recognises a person, is never sent to the model. Nothing else about your mail leaves Mailbag and your mail provider.</p>
+    </section>
+    <section>
+      <h2>What Mailbag accesses</h2>
+      <p>Message headers and bodies in your Gmail inbox, to score and display them. Labels and folders. When you press File, Mailbag creates a folder called Mailbag with seven folders under it (Gmail labels or iCloud folders) and moves mail there. It also archives or deletes when you ask. Deleting in Gmail moves mail to Trash. It never sends outbound mail on your behalf.</p>
+    </section>
+    <section>
+      <h2>What Mailbag stores</h2>
+      <p>An OAuth access/refresh token, encrypted at rest in Cloudflare KV, so you don't have to reconnect every visit. No message content is stored — inbox data is read live from Gmail each time you open the app and discarded after rendering. Mailbag keeps no copy of what it sends to the model.</p>
+    </section>
+    <section>
+      <h2>What Mailbag never does</h2>
+      <p>Sell or share your data with third parties. Use your mail for advertising. Run in the background without you opening the app.</p>
+    </section>
+    <section>
+      <h2>Revoking access</h2>
+      <p>Remove Mailbag's access anytime at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</p>
+    </section>
+    <section>
+      <h2>Contact</h2>
+      <p>Questions: <a href="https://jaybulb.com">jaybulb.com</a>.</p>
+    </section>
+</article>
+</main>
 
-<h2>What Mailbag never does</h2>
-<p>Sell or share your data with third parties. Use your mail for advertising. Run in the background without you opening the app.</p>
-
-<h2>Revoking access</h2>
-<p>Remove Mailbag's access anytime at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</p>
-
-<h2>Contact</h2>
-<p>Questions: <a href="https://jaybulb.com">jaybulb.com</a>.</p>
-</div>
+<footer class="foot" id="footer">
+  <div class="foot-top">
+    <div class="foot-brand"><img src="icon.svg" alt="" width="40" height="40"><b>Mailbag</b><p>Inbox zero, one button.</p></div>
+    <nav class="foot-cols" aria-label="Footer">
+      <div><p class="label">Mailbag</p><a href="/#inbox">Try it</a><a href="/#features">Features</a><a href="/#more">More</a><a href="privacy">Privacy</a></div>
+      <div><p class="label">Source</p><a href="https://github.com/nulljosh/mailbag">GitHub</a><a href="https://github.com/nulljosh/mailbag/blob/main/WHITEPAPER.md">Whitepaper</a><a href="https://github.com/nulljosh/mailbag/blob/main/docs/ARCHITECTURE.md">Architecture</a><a href="https://github.com/nulljosh/mailbag/blob/main/SECURITY.md">Security</a><a href="https://github.com/nulljosh/mailbag/issues">Report a bug</a></div>
+      <div><p class="label">More</p><a href="https://github.com/nulljosh/mailbag/blob/main/LICENSE">License (MIT)</a><a href="https://jaybulb.com">More apps</a><a href="/#top">Back to top</a></div>
+    </nav>
+  </div>
+    <p class="legal">&copy; 2026 Joshua Trommel &middot; MIT License &middot; Made in Vancouver, BC &middot; <a href="privacy">Privacy</a></p>
+</footer>
 </body>
 </html>

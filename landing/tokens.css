@@ -1,0 +1,78 @@
+/* Mailbag design tokens, shared with the landing (the native apps keep their own accent in the asset catalog).
+   Shared system: 8 point grid, one radius set, 48 point capsule controls. The accent is the only colour Mailbag owns. */
+@font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+/* Mailbag Display: Antonio (SIL OFL 1.1, fonts/OFL-Antonio.txt), condensed caps for headlines and labels only */
+@font-face { font-family: "Mailbag Display"; src: url("fonts/MailbagDisplay.woff2") format("woff2"); font-weight: 100 700; font-display: swap; }
+
+:root {
+  /* colour */
+  --accent: #0074D9;          /* actions and links; clrs.cc blue, AA on paper */
+  --btn: #0074D9;             /* solid buttons, white label */
+  --frame: #0074D9;           /* the thin frame down the window edges */
+  --band: #006ac6;            /* full-bleed blue sections */
+  --band-sub: #e6f2fd;        /* secondary text on the band, AA */
+  --band-art: #a8d4f8;        /* engraving on the band */
+  --band-line: rgba(255, 255, 255, .22);
+  --accent-light: #0074D9;    /* icon gradient top, clrs.cc blue */
+  --accent-deep: #004C8F;     /* icon gradient bottom */
+  --ring: color-mix(in srgb, var(--accent) 30%, transparent);
+  --bg: #fdfdfd;
+  --surface: #f2f4f8;
+  --line: #dcdfe6;
+  --text: #1a1a1a;
+  --sub: #5a5f6e;
+  --live: #2f8a4e;            /* filed */
+  --pending: #b07a00;         /* waiting */
+  --bad: #c0392b;             /* failed */
+  --idle: #8a8d99;            /* unknown */
+
+  /* type */
+  --display: "Mailbag Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font: "Mailbag Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --size-display: 64px;       /* hero: 64 line, -0.01em */
+  --size-title: 34px;         /* section heads: 40 line */
+  --size-headline: 20px;      /* card heads: 28 line */
+  --size-body: 17px;          /* 24 line */
+  --size-footnote: 13px;      /* 16 line */
+
+  /* space: the 8 point grid */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --measure: 680px;
+  --wrap: 1120px;
+
+  /* shape */
+  --control: 48px;
+  --r-card: 28px;
+  --r-group: 20px;
+  --r-row: 8px;
+  --r-pill: 999px;
+  --r-sq: 2px;                /* landing buttons and panels */
+  --r-icon: 22.5%;
+  --motion: .2s ease;
+
+  /* names the inbox script was written against */
+  --border: var(--line); --muted: var(--sub); --panel: var(--surface); --on-accent: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #66b5f7;
+    --btn: #0074D9;
+    --frame: #0074D9;
+    --band: #004C8F;
+    --band-sub: #d4e8fa;
+    --band-art: #5da6e6;
+    --bg: #001f3f;            /* clrs.cc navy */
+    --surface: #072a4d;
+    --line: #17406b;
+    --text: #f2f2f5;
+    --sub: #a3b8cf;
+    --live: #4caf6e;
+    --pending: #e0a800;
+    --bad: #d9534f;
+    --idle: #6f7488;
+  }
+}
