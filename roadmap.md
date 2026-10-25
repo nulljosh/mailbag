@@ -7,3 +7,6 @@
 
 ## Ingested 2026-10-16
 - [ ] Waiting on Apple for the iOS and macOS builds submitted 2026-10-18 as Mailbag (build 202610181800). Check the result in Resolution Center if either is rejected.
+
+## Ingested 2026-10-25
+- [ ] Add custom support for more mail providers, Telus etcetera (note title was "Mailbox", assumed Mailbag).
