@@ -10,3 +10,4 @@
 
 ## Ingested 2026-10-25
 - [ ] Add custom support for more mail providers, Telus etcetera (note title was "Mailbox", assumed Mailbag).
+  - Needs scoping, not started 2026-10-26. `worker.js` runs on Cloudflare Workers and only speaks Gmail OAuth and Outlook Graph (Outlook still unregistered). Telus and most small hosts are plain IMAP with a password, which a Worker cannot reach without raw TCP sockets and stored app passwords. Mac Mail.app mode (`ios/App/MacMail.swift`, Debug only) already reads any provider. Decide: ship Mail.app mode in the store build, or build an IMAP bridge. Provider list and whether to store passwords is Joshua's call.
