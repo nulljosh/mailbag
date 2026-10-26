@@ -1,7 +1,7 @@
-#if os(macOS) && DEBUG
+#if os(macOS)
 import Foundation
 
-/// Mail.app on this Mac, driven over Apple Events. Debug builds only: the store build has no Apple Events entitlement.
+/// Mail.app on this Mac, driven over Apple Events. Mac only: needs the Apple Events entitlement for Mail.
 /// Mail stays on the Mac; only sender and subject go to /api/sort.
 /// Gmail accounts are skipped: Mail.app's move only copies into a Gmail label and the mail stays in the inbox,
 /// so Gmail is cleared through the Gmail connection instead.

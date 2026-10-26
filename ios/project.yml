@@ -27,10 +27,6 @@ targets:
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_ENTITLEMENTS: Mailbag.entitlements
         CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Mailbag-macOS.entitlements
-      configs:
-        Debug:
-          # Mail.app mode is a personal build: Apple Events to Mail never ship to the store.
-          CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: Mailbag-macOS-Debug.entitlements
   MailbagTests:
     type: bundle.unit-test
     supportedDestinations: [iOS, macOS]

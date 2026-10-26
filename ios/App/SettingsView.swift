@@ -58,7 +58,6 @@ struct SettingsView: View {
 
     private func load() async {
         guard session.token != nil else { rows = []; return }
-        #if DEBUG
         if session.isMacMail, let all = try? MacMail.accounts() {
             rows = all.map { a in
                 guard a.isGmail else { return Row(name: a.name, detail: "Mail on this Mac", count: a.count) }
@@ -67,7 +66,6 @@ struct SettingsView: View {
             }
             return
         }
-        #endif
         let n = (try? await session.api?.messages().count) ?? 0
         rows = [Row(name: session.label, detail: "Signed in", count: n)]
     }

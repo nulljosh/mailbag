@@ -122,7 +122,6 @@ struct SimpleInboxView: View {
     /// Gmail account that has been signed in to; otherwise the one signed-in account.
     private func sources() async throws -> [Source] {
         guard let api = session.api else { return [] }
-        #if DEBUG
         if session.isMacMail {
             var out: [Source] = []
             let items = try MacMail.inbox()
@@ -143,13 +142,11 @@ struct SimpleInboxView: View {
             gmailToConnect = gmailToOffer(unconnected)
             return out
         }
-        #endif
         gmailLeft = 0; gmailToConnect = nil
         let messages = try await api.messages()
         return messages.isEmpty ? [] : [Source(api: api, messages: messages)]
     }
 
-    #if DEBUG
     /// The Mail.app session only exists to call /api/sort and holds no mailbox, so when it runs out get a new one.
     private func sortInMailMode(_ items: [MailItem]) async throws -> [Message] {
         do { return try await session.api?.sort(items) ?? [] } catch let error as APIError where error.message.hasPrefix("Session expired") {
@@ -158,7 +155,6 @@ struct SimpleInboxView: View {
             return try await api.sort(items)
         }
     }
-    #endif
 
     private func load() async {
         do {
@@ -204,11 +200,7 @@ struct SimpleInboxView: View {
         let folderMail = source.messages.filter { $0.folder != nil }
         let people = source.messages.filter { $0.folder == nil }
         guard let api = source.api else {
-            #if DEBUG
             return try MacMail.clear(source.messages)
-            #else
-            return (0, 0)
-            #endif
         }
         let filed = folderMail.isEmpty ? 0 : try await api.organize(folderMail).total
         for m in people { try await api.perform(.archive, on: m) }

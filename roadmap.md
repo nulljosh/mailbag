@@ -9,5 +9,5 @@
 - [ ] Waiting on Apple for the iOS and macOS builds submitted 2026-10-18 as Mailbag (build 202610181800). Check the result in Resolution Center if either is rejected.
 
 ## Ingested 2026-10-25
-- [ ] Add custom support for more mail providers, Telus etcetera (note title was "Mailbox", assumed Mailbag).
-  - Needs scoping, not started 2026-10-26. `worker.js` runs on Cloudflare Workers and only speaks Gmail OAuth and Outlook Graph (Outlook still unregistered). Telus and most small hosts are plain IMAP with a password, which a Worker cannot reach without raw TCP sockets and stored app passwords. Mac Mail.app mode (`ios/App/MacMail.swift`, Debug only) already reads any provider. Decide: ship Mail.app mode in the store build, or build an IMAP bridge. Provider list and whether to store passwords is Joshua's call.
+- [x] More mail providers (Telus etc.): decided 2026-10-26 to ship Mac Mail.app mode in the store build, no IMAP bridge, no stored passwords. `MacMail.swift` is no longer Debug only and the macOS entitlements carry the Mail Apple Events exception. Release macOS build succeeds.
+- [ ] Submit the next Mac build with Mail.app mode: needs `asc web auth login` (throttled until 12:20Z). Put a justification for the `temporary-exception.apple-events` com.apple.mail entitlement in the review notes (it reads Mail inboxes, sends only sender and subject to /api/sort, files into Mailbag/ folders). Expect a possible entitlement push-back; fallback is a Direct download build.

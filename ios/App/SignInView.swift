@@ -39,9 +39,7 @@ struct SignInView: View {
                 if showICloud {
                     VStack(spacing: 8) { icloudFields }.textFieldStyle(.roundedBorder).frame(width: 260).padding(.vertical, 4)
                 }
-                #if DEBUG
                 wide("Use Mail on this Mac") { Task { await session.macMail() } }
-                #endif
             }
             .padding(.top, 28)
 
