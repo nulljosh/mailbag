@@ -23,7 +23,7 @@ struct SettingsView: View {
                 ForEach(rows) { r in
                     LabeledContent {
                         HStack(spacing: 12) {
-                            Text("\(r.count) in inbox").monospacedDigit()
+                            Text("\(r.count) in inbox")
                             if let g = r.gmail {
                                 if g.connected {
                                     Button("Disconnect") { session.forgetGmail(g.email) }
