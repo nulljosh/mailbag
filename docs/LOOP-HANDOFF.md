@@ -1,31 +1,33 @@
-# Mailbag loop handoff (2026-10-20, morning)
-
-**Submitted 2026-10-18:** build 202610181800 on iOS and Mac, listing renamed Mailbag, new screenshots and review notes, short reply to Apple on both threads. Last recorded state: both WAITING_FOR_REVIEW. The 2.1(a) rejection came from the reviewed build calling a retired API host, so every sign-in and the demo inbox failed. The code now points at the jaybulb.com host.
+# Mailbag loop handoff (2026-10-30, 11:30)
 
 ## What the loop is
 
-Keep every inbox on Joshua's Mac at zero with the app itself, add Outlook, then submit one Mailbag build to the App Store.
+QA Mailbag on the landing (mailbag.jaybulb.com), the iPhone app and the Mac app with screenshots until each one reads A+, then ship the next store build carrying the new icon and fonts.
 
 ## Where things stand
 
-- Inboxes: iCloud is at zero (action items filed into `Mailbag/Dev`). Gmail was cleared on the web on 2026-10-20: 1 filed, 2 archived, nothing deleted. Gmail through Mail.app bounces back after a sync, so do not call a Gmail inbox clean until it has survived one.
-- Landing: rebuilt 2026-10-20 and live at mailbag.jaybulb.com in the Hermes style, with Greek halftone art, Mailbag Sans and Mailbag Display fonts, a glyph footer, a restyled privacy page and a new og image. Accent is clrs.cc blue (#0074D9, deep #004C8F, dark mode navy #001f3f). The brand kit (`brand/tokens.css`, `brand/BRAND.md`) and every icon are blue. Playwright QA passed.
-- App Store: the build in review still has the old pink icon. The blue icon ships with the next store build.
-- The Mac app is installed at `/Applications/Mailbag.app` (Debug build, Mail.app mode). Each Gmail account needs its own Gmail sign-in in the window: Ja and Gmail are both still waiting for one.
-- Sorter: people are never filed or sent to the model, debt and legal notices are never filed, Junk needs scam signs. See "Who may be filed" in CLAUDE.md.
-- Misfiled mail: the TSI collections notice is back in the Ja inbox at Joshua's request. Gmail still shows the old `Mailbag/Junk` label on it, which Mail.app cannot remove without risking Trash. Nothing was deleted.
-- Outlook: parked. Joshua only has a school Microsoft account (langleyschools.ca), and that directory does not let users register apps. It needs a personal Microsoft account with its own directory. `az` is still logged in to the school tenant: do not register anything there.
+- Store: the iOS and Mac builds submitted 2026-10-18 (build 202610181800) are in Apple review as Mailbag, last checked. The store still shows the old pink icon. Nothing new is submitted; the next build carries everything below.
+- Fonts: Mailbag Sans and Mailbag Display are Inter 4's text cut (opsz 14) and display cut (opsz 32), renamed by `scripts/gen_font.py` and set like SF: sentence case, bold, tight tracking, proportional figures. They run in the iPhone and Mac apps too, not only the site.
+- Icon: a mail case (an envelope with a handle) replaces the thin outlined envelope that read like Apple Mail. The brand kit and every icon use the clrs.cc blue.
+- Landing: matches Hermes 1:1 in design. The hero headline is the tagline "Inbox zero, one button". The demo inbox animates for signed-out visitors: a sample inbox sorts itself into folders on a loop.
+- Mascot: the same mail case with eyes, a smile and little legs, above the closing call to action.
+- Fixed: Connect Outlook no longer shows on the site while Outlook is off.
+- Inboxes: iCloud is at zero. The first Gmail account was cleared on the Mac on 2026-10-26 (14 filed, 4 archived, nothing deleted). The second Gmail account still needs its sign-in click in the Mac app.
+- Mac app: Joshua's copy is the Debug build at `/Applications/Mailbag.app`, in Mail.app mode. No Mac app screenshot exists yet: the scratch build was unsigned, so it was not launched.
+- Outlook: parked. Joshua's school Microsoft account cannot register apps, and `az` is logged in to that tenant, so register nothing with it. It needs a personal Microsoft account with its own directory.
+- Google OAuth: the Mailbag callback is not yet in GCP Web client 1, and the app is not submitted for verification.
 
 ## Next, in order
 
-1. Gmail sign-in in the Mac app: Joshua clicks it once for each Gmail account (Ja and Gmail). If an account still reads "Sign in to Gmail" after a click, treat it as a bug in `Session.addGmail`/`saveGmail`. Do not launch the app in front of him to check. Ask him, or read the Keychain after he has used it: `security find-generic-password -s com.nulljosh.sieve -a gmail`.
-2. Add `https://mailbag.jaybulb.com/auth/callback` in GCP Web client 1 (Chrome account jatrommel@gmail.com), then move `GOOGLE_REDIRECT` and `apiBase` to the mailbag host. Then submit the app for Google OAuth verification to lift the "unverified app" warning and the 100-user cap.
-3. Outlook waits for a personal Microsoft account with its own directory. Then `az login`, register the Entra app, make a secret, `wrangler secret put` both values, deploy, test on a real mailbox. After that, add "Continue with Outlook" to the native sign-in.
-4. Retake iPhone, iPad and Mac screenshots with `-demo YES`.
-5. Next store build: carries the blue icon and the listing name flip. Check disk (about 6 GB free for the archives), archive iOS and macOS, upload, then cancel the old review, set the listing name to Mailbag and submit, all in one move.
+1. QA the landing with screenshots at phone and desktop width. Check the 16px side gutter, no horizontal scroll, the demo inbox loop, the mascot placement and that Connect Outlook stays hidden. Fix anything under A+ and re-shoot.
+2. QA the iPhone app in the simulator and the Mac app from a signed scratch build, one instance at a time, trap-killing after each shot. Read the screens against the Hermes bar before calling them A+.
+3. Retake the README and store screenshots with `-demo YES`.
+4. Next store build: check disk first (about 6 GB free for the archives), archive iOS and macOS, upload, and submit. Do not cancel the review in progress without Joshua's yes.
+5. Google OAuth: add `https://mailbag.jaybulb.com/auth/callback` in GCP Web client 1, move `GOOGLE_REDIRECT` and `apiBase` to the mailbag host, then submit for verification to lift the unverified-app warning and the 100-user cap.
+6. Outlook waits for a personal Microsoft account with its own directory. Then `az login`, register the Entra app, make a secret, `wrangler secret put` both values, deploy, and test on a real mailbox.
 
 ## Restart prompt
 
 ```
-/loop until every inbox on this Mac clears from the Mailbag window, Outlook works on a real mailbox, and the Mailbag build is submitted
+/loop QA Mailbag (landing, iPhone and Mac apps) with screenshots until A+, then ship the next store build with the new icon and fonts
 ```

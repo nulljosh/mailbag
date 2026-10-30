@@ -56,4 +56,4 @@ The first Gmail clear put a TSI collections notice in Junk and two school emails
 
 ## The loop
 
-State: `docs/LOOP-HANDOFF.md`. Goal: Outlook working on a real mailbox, then one Mailbag build submitted to the App Store.
+State: `docs/LOOP-HANDOFF.md`. Goal: QA the landing, iPhone and Mac apps with screenshots until A+, then ship the next store build with the new icon and fonts. Outlook waits on a personal Microsoft account.
