@@ -22,16 +22,36 @@
     {
       "layers": [
         {
-          "glass": false,
-          "image-name": "glyph.png",
-          "name": "Mailbag"
+          "glass": true,
+          "image-name": "bag.png",
+          "name": "Bag"
         }
       ],
       "lighting": "individual",
-      "name": "Mailbag",
+      "name": "Bag",
       "shadow": {
         "kind": "neutral",
-        "opacity": 0.3
+        "opacity": 0.5
+      },
+      "specular": true,
+      "translucency": {
+        "enabled": true,
+        "value": 0.15
+      }
+    },
+    {
+      "layers": [
+        {
+          "glass": true,
+          "image-name": "front.png",
+          "name": "Letter"
+        }
+      ],
+      "lighting": "individual",
+      "name": "Letter",
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.4
       },
       "specular": true,
       "translucency": {

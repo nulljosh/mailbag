@@ -1,6 +1,6 @@
 # Mailbag brand kit and design system
 
-Mailbag sorts your inbox in one button. The mark is a mail case: an envelope with a handle. The flap is the same V as the quote marks in Mailbag Sans.
+Mailbag sorts your inbox in one button. The mark is a letter sliding into a mail sack. The app icon is a Liquid Glass Icon Composer bundle (`Mailbag.icon`): the sack is the front glass layer, tinted pale blue, the letter the back layer, white. The flap is the same V as the quote marks in Mailbag Sans.
 
 ## The mark
 One bold flat white glyph on an accent gradient tile. No text, no outline, no emblem.
@@ -11,7 +11,7 @@ One bold flat white glyph on an accent gradient tile. No text, no outline, no em
 - Clear space equal to the width of the glyph's thickest stroke. Smallest size 16 px.
 
 ## The mascot
-`mascot.svg` is the mail case awake: the icon's bag with two eyes on the flap, a smile and two stubby legs, flat in the two icon blues on a pale disc. Show it at 112 px (hero or call to action) or 28 px (nav), never with a ring, shadow or animation. It is the same object as the icon, never a bird (a blue bird reads as Twitter).
+`mascot.svg` is the sack awake: the icon's sack with two eyes, a smile and two stubby legs, a letter in its mouth, flat in the icon blues on a pale disc. Show it at 112 px (hero or call to action) or 28 px (nav), never with a ring, shadow or animation. It is the same object as the icon, never a bird (a blue bird reads as Twitter).
 
 ## Colour
 clrs.cc blue on near white in light, clrs.cc navy in dark. One accent, flat surfaces, no gradients except the icon tile, no shadows.
