@@ -1,6 +1,6 @@
 # Mailbag brand kit and design system
 
-Mailbag sorts your inbox in one button. The mark is an envelope.
+Mailbag sorts your inbox in one button. The mark is a mail case: an envelope with a handle. The flap is the same V as the quote marks in Mailbag Sans.
 
 ## The mark
 One bold flat white glyph on an accent gradient tile. No text, no outline, no emblem.
@@ -9,6 +9,9 @@ One bold flat white glyph on an accent gradient tile. No text, no outline, no em
 - `../icon.svg` is the flat copy for READMEs (shown at 80 px). `icon-1024.png` is the App Store icon, no alpha.
 - `mark.svg` is the glyph alone in `currentColor` for your own background.
 - Clear space equal to the width of the glyph's thickest stroke. Smallest size 16 px.
+
+## The mascot
+`mascot.svg` is the mail case awake: the icon's bag with two eyes on the flap, a smile and two stubby legs, flat in the two icon blues on a pale disc. Show it at 112 px (hero or call to action) or 28 px (nav), never with a ring, shadow or animation. It is the same object as the icon, never a bird (a blue bird reads as Twitter).
 
 ## Colour
 clrs.cc blue on near white in light, clrs.cc navy in dark. One accent, flat surfaces, no gradients except the icon tile, no shadows.

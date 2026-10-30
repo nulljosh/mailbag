@@ -103,6 +103,8 @@ h3 { font-size: 28px; line-height: 32px; font-weight: 600; letter-spacing: -.02e
 /* Footer: brand and link columns, the engraved band of Mailbag's things, one fine line */
 .foot-cta { max-width: var(--wrap); margin: 0 auto var(--sp-8); padding: 0 var(--sp-4); text-align: center; }
 .foot-cta h2 { font-size: clamp(48px, 8vw, 128px); }
+/* the mascot: the mail case itself, awake */
+.mascot { display: block; margin: 0 auto var(--sp-4); }
 .foot-cta .cta { margin-top: var(--sp-5); justify-content: center; }
 .foot { text-align: center; padding: var(--sp-8) var(--sp-4) var(--sp-5); background: var(--bg); overflow: hidden; border-top: 1px solid var(--line); }
 .foot-top { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--sp-4); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-7); text-align: left; }
