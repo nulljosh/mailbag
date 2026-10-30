@@ -30,7 +30,7 @@ struct SignInView: View {
         VStack(spacing: 0) {
             Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 96, height: 96)
                 .accessibilityHidden(true)
-            Text(appName.uppercased()).font(.mbDisplay(40, .medium)).tracking(2).padding(.top, 10)
+            Text(appName).font(.mbDisplay(40)).tracking(-1).padding(.top, 10)
             Text("Inbox zero, one button.").font(.mb(.title3)).foregroundStyle(.secondary).padding(.top, 4)
 
             VStack(spacing: 10) {

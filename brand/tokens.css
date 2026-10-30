@@ -4,8 +4,8 @@
 @font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 @font-face { font-family: "Mailbag Sans"; src: url("fonts/MailbagSans-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-/* Mailbag Display: Antonio (SIL OFL 1.1, fonts/OFL-Antonio.txt), condensed caps for headlines and labels only */
-@font-face { font-family: "Mailbag Display"; src: url("fonts/MailbagDisplay.woff2") format("woff2"); font-weight: 100 700; font-display: swap; }
+/* Mailbag Display: Inter display cut (SIL OFL 1.1, fonts/OFL.txt), SF Pro Display in spirit: headlines and big numbers only, tight tracking */
+@font-face { font-family: "Mailbag Display"; src: url("fonts/MailbagDisplay.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
 
 :root {
   /* colour */

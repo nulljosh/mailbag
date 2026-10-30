@@ -72,7 +72,7 @@ struct SimpleInboxView: View {
                 .accessibilityIdentifier("zero")
         } else {
             Text("\((count ?? 0) + gmailLeft)")
-                .font(.mbDisplay(124, .light)).monospacedDigit()
+                .font(.mbDisplay(124)).monospacedDigit()
                 .contentTransition(.numericText())
                 .accessibilityIdentifier("count")
         }

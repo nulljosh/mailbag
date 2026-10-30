@@ -283,22 +283,17 @@
     function run() {
       frame();
       const steps = SAMPLE.map((m, i) => [m, i]).filter(([m]) => m.category);
-      if (still) {
-        steps.forEach(([m, i]) => { el.querySelector(`[data-i="${i}"]`).remove(); const b = el.querySelector(`[data-box="${m.category}"]`); b.textContent = +b.textContent + 1; });
-        return done();
-      }
+      // the row takes its folder chip, fades where it sits (like the real inbox, so nothing below jumps), and its box counts up
+      const file = ([m, i]) => {
+        const row = el.querySelector(`[data-i="${i}"]`), chip = row.querySelector('.chip'), b = el.querySelector(`[data-box="${m.category}"]`);
+        chip.textContent = m.category; chip.removeAttribute('style'); row.classList.add('filed');
+        b.textContent = +b.textContent + 1; b.parentNode.classList.remove('bump'); void b.offsetWidth; b.parentNode.classList.add('bump');
+      };
+      if (still) { steps.forEach(file); return done(); }
       let k = 0;
       const tick = () => {
         if (k === steps.length) { done(); return setTimeout(run, 3200); }
-        const [m, i] = steps[k++];
-        const row = el.querySelector(`[data-i="${i}"]`);
-        const chip = row.querySelector('.chip');
-        chip.textContent = m.category; chip.removeAttribute('style');
-        setTimeout(() => {
-          row.classList.add('filing');
-          const b = el.querySelector(`[data-box="${m.category}"]`);
-          setTimeout(() => { row.remove(); b.textContent = +b.textContent + 1; b.parentNode.classList.remove('bump'); void b.offsetWidth; b.parentNode.classList.add('bump'); }, 450);
-        }, 500);
+        file(steps[k++]);
         setTimeout(tick, 1100);
       };
       setTimeout(tick, 1200);

@@ -32,8 +32,8 @@ Filed, waiting and failed dots keep the shared greens, ambers and reds. The acce
 ## Type
 Two faces, both shipped in `fonts/` with their licences.
 
-- **Mailbag Sans**, the body face: Inter under the SIL Open Font License, renamed and pinned by `scripts/gen_font.py`, with the curly quotes redrawn as envelope flaps (comma and low quotes are flattened first, so only the real quotes change). Four weights, 400 to 700. The fallback is the system stack. Scale 64/64, 34/40, 20/28, 17/24, 13/16.
-- **Mailbag Display**, headlines and labels only: Antonio (OFL), condensed caps. Hero 17vw at weight 100, section heads 7vw at 100, card heads 30 at 300, labels 14 at 500 with .08em tracking. Never for body text.
+- **Mailbag Sans**, the body face: Inter's text cut (optical size 14, SF Pro Text in spirit) under the SIL Open Font License, renamed and pinned by `scripts/gen_font.py`, with the curly quotes redrawn as envelope flaps (comma and low quotes are flattened first, so only the real quotes change). Four weights, 400 to 700. The fallback is the system stack. Scale 64/64, 34/40, 20/28, 17/24, 13/16.
+- **Mailbag Display**, headlines and big numbers only: Inter's display cut (optical size 32, SF Pro Display in spirit, OFL). Sentence case, bold, tight tracking the way Apple sets SF: hero 12vw at 700 and -.045em, section heads 5.6vw at 700 and -.035em, card heads 28 at 600. Buttons, labels and chips are Mailbag Sans in sentence case, no tracking. The apps use the one Bold static for the big count and the title. Condensed Antonio caps were dropped on 2026-10-30.
 
 ## The landing
 Dressed after the Hermes landing (same clrs.cc blue): a navy page in a 4 px blue frame down both edges, giant thin condensed caps, small square buttons (2 px radius, 40 px), and full-bleed blue bands with film grain.

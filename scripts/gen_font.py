@@ -1,12 +1,16 @@
-"""Mailbag Sans: Inter (Rasmus Andersson, SIL Open Font License 1.1, no reserved name), renamed, with its curly
-quote marks redrawn as envelope flaps, so every quote on the page wears the mark.
-Inter is drawn in the spirit of San Francisco and Helvetica: open shapes, even proportional spacing, built for screens.
+"""Mailbag Sans and Mailbag Display: both cut from Inter 4 (Rasmus Andersson, SIL Open Font License 1.1, no reserved
+name), renamed. Inter is drawn in the spirit of San Francisco, and its optical sizes split the same way SF does:
+Sans is the text cut (optical size 14, like SF Pro Text) in four static weights, with its curly quote marks redrawn as
+envelope flaps, so every quote on the page wears the mark. Display is the display cut (optical size 32, like SF Pro
+Display) for headlines and numbers: variable in weight for the web, one Bold static for the apps.
+Condensed Antonio caps were the display face until 2026-10-30; Joshua wanted SF, not a poster face.
 
 Same method as Mailbag Sans, coda's Quip Sans and turing's Samantha Sans: pinned release, renamed, OFL shipped beside the fonts,
 original copyright kept in the name table, fixed timestamps so every build is the same bytes.
 
-    python3 scripts/gen_font.py            # writes fonts/MailbagSans-{Regular,Medium,Semibold,Bold}.{ttf,woff2} + OFL.txt
-    python3 scripts/gen_font.py --check    # named Mailbag Sans, OFL present, original copyright kept
+    python3 scripts/gen_font.py            # writes fonts/MailbagSans-{Regular,Medium,Semibold,Bold}.{ttf,woff2},
+                                           # fonts/MailbagDisplay.{woff2,ttf} and OFL.txt
+    python3 scripts/gen_font.py --check    # named Mailbag, OFL present, original copyright kept
 Needs fonttools and brotli (uv run --with fonttools --with brotli).
 """
 import io
@@ -20,10 +24,12 @@ from fontTools.pens.recordingPen import DecomposingRecordingPen
 from fontTools.pens.transformPen import TransformPen
 from fontTools.pens.ttGlyphPen import TTGlyphPen
 from fontTools.ttLib import TTFont
+from fontTools.varLib import instancer
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(HERE, "fonts")
-SOURCE = "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.2.5/"
+SOURCE = "https://cdn.jsdelivr.net/npm/@fontsource-variable/inter@5.2.8/"
+VARIABLE = "files/inter-latin-opsz-normal.woff2"   # axes: opsz 14-32, wght 100-900
 WEIGHTS = {"Regular": 400, "Medium": 500, "Semibold": 600, "Bold": 700}
 
 
@@ -81,12 +87,13 @@ def redraw_quotes(font):
         hmtx[name] = (hmtx[name][0], glyf[name].xMin)
 
 
-def rename(font, style):
-    """Give the outlines the Mailbag Sans name; copyright (0) and license (13, 14) stay as the authors wrote them."""
-    names = {1: "Mailbag Sans", 2: style, 3: f"MailbagSans-{style}", 4: f"Mailbag Sans {style}", 5: "Version 1.000",
-             6: f"MailbagSans-{style}", 16: "Mailbag Sans", 17: style}
+def rename(font, family, style):
+    """Give the outlines the Mailbag name; copyright (0), license (13, 14) and the variable axis names (256 up) stay."""
+    ps = family.replace(" ", "")
+    names = {1: family, 2: style, 3: f"{ps}-{style}", 4: f"{family} {style}", 5: "Version 1.000",
+             6: f"{ps}-{style}", 16: family, 17: style}
     table = font["name"]
-    table.names = [n for n in table.names if n.nameID in (0, 13, 14)]
+    table.names = [n for n in table.names if n.nameID in (0, 13, 14) or n.nameID >= 256]
     for nid, text in names.items():
         table.setName(text, nid, 3, 1, 0x409)
         table.setName(text, nid, 1, 0, 0)
@@ -108,7 +115,12 @@ def check():
                 g = glyf[cmap[cp]]
                 assert g.numberOfContours == n, f"U+{cp:04X} is not the flap"
                 assert 0 <= g.xMin and g.xMax <= hmtx[cmap[cp]][0], f"U+{cp:04X} spills out of its advance"
-    print(f"font ok: Mailbag Sans (Inter, OFL), {len(WEIGHTS)} weights, quotes are envelope flaps")
+    for ext in ("ttf", "woff2"):
+        f = TTFont(os.path.join(OUT, f"MailbagDisplay.{ext}"))
+        assert f["name"].getDebugName(1) == "Mailbag Display", "display family name"
+        assert f["name"].getDebugName(0), "the original copyright must stay in the name table"
+    assert "fvar" in TTFont(os.path.join(OUT, "MailbagDisplay.woff2")), "the web display cut keeps its weight axis"
+    print(f"font ok: Mailbag Sans and Mailbag Display (Inter text and display cuts, OFL), {len(WEIGHTS)} weights, quotes are envelope flaps")
 
 
 def main():
@@ -117,14 +129,24 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "OFL.txt"), "wb") as f:
         f.write(fetch("LICENSE"))
+    source = fetch(VARIABLE)
+    cut = lambda axes: instancer.instantiateVariableFont(TTFont(io.BytesIO(source)), axes)
     for style, weight in WEIGHTS.items():
-        font = TTFont(io.BytesIO(fetch(f"files/inter-latin-{weight}-normal.woff2")))
+        font = cut({"opsz": 14, "wght": weight})
         redraw_quotes(font)
-        rename(font, style)
+        rename(font, "Mailbag Sans", style)
         for ext, flavor in (("ttf", None), ("woff2", "woff2")):
             font.flavor = flavor
             font.save(os.path.join(OUT, f"MailbagSans-{style}.{ext}"), reorderTables=False)
-        print(f"MailbagSans-{style}: Inter {weight}")
+        print(f"MailbagSans-{style}: Inter opsz 14, wght {weight}")
+    # the web keeps the weight axis; the apps get one Bold static, which is all they use
+    for ext, axes, flavor, style in (("woff2", {"opsz": 32}, "woff2", "Regular"),
+                                     ("ttf", {"opsz": 32, "wght": 700}, None, "Bold")):
+        font = cut(axes)
+        rename(font, "Mailbag Display", style)
+        font.flavor = flavor
+        font.save(os.path.join(OUT, f"MailbagDisplay.{ext}"), reorderTables=False)
+    print("MailbagDisplay: Inter opsz 32")
 
 
 if __name__ == "__main__":

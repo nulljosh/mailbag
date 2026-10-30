@@ -7,15 +7,13 @@ let brandBlue = Color(nsColor: NSColor(name: nil) { $0.bestMatch(from: [.darkAqu
 let brandBlue = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.36, green: 0.56, blue: 0.94, alpha: 1) : UIColor(red: 0.12, green: 0.37, blue: 0.82, alpha: 1) })
 #endif
 
-/// Mailbag Sans for text, Mailbag Display (condensed caps face) for big numbers and the name, same as the landing.
+/// Mailbag Sans for text, Mailbag Display (the SF Pro Display-style cut) for big numbers and the name, same as the landing.
 /// Sizes follow the platform's text styles and scale with Dynamic Type.
 extension Font {
     static func mb(_ style: Font.TextStyle, _ weight: Font.Weight = .regular) -> Font {
         .custom("Mailbag Sans", size: mbSize(style), relativeTo: style).weight(weight)
     }
-    static func mbDisplay(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
-        .custom("Antonio", size: size).weight(weight)
-    }
+    static func mbDisplay(_ size: CGFloat) -> Font { .custom("Mailbag Display", size: size) }
 }
 
 private func mbSize(_ style: Font.TextStyle) -> CGFloat {
@@ -44,6 +42,7 @@ struct RootView: View {
             }
         }
         .tint(brandBlue)
+        .font(.mb(.body))
         // `-dark YES` forces dark mode for screenshots
         .preferredColorScheme(launchFlag("dark") ? .dark : nil)
         // runs at launch, and again whenever the app ends up with no session
@@ -68,9 +67,17 @@ struct MailbagApp: App {
 
     // The main window belongs to MacWindow, not to a WindowGroup. See the note there.
     var body: some Scene {
-        Settings { SettingsView().environmentObject(session).tint(brandBlue) }
+        Settings { SettingsView().environmentObject(session).tint(brandBlue).font(.mb(.body)) }
     }
     #else
+    init() {
+        // Navigation titles are UIKit, so they get the faces here: Display for the big title, like the landing's headings.
+        if let display = UIFont(name: "MailbagDisplay-Bold", size: 34), let sans = UIFont(name: "MailbagSans-Semibold", size: 17) {
+            UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: display)]
+            UINavigationBar.appearance().titleTextAttributes = [.font: UIFontMetrics(forTextStyle: .headline).scaledFont(for: sans)]
+        }
+    }
+
     var body: some Scene {
         WindowGroup { RootView().environmentObject(session) }
     }
