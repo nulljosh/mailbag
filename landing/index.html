@@ -257,8 +257,61 @@
   }
 
   const native = params.get('native');
+  // Signed out: a sample inbox sorts itself on a loop, so the page shows the product before anyone connects.
+  const SAMPLE = [
+    { from: 'Air Canada', subject: 'Your boarding pass: YVR to SFO', category: 'Travel' },
+    { from: 'Mom', subject: 'Dinner Sunday?', category: null },
+    { from: 'GitHub', subject: '[mailbag] CI passed on main', category: 'Dev' },
+    { from: 'Apple', subject: 'Your receipt from Apple', category: 'Receipts' },
+    { from: 'Substack', subject: 'This week in design', category: 'Newsletters' },
+    { from: 'Prize Center', subject: 'You won a $500 gift card!!', category: 'Junk' },
+    { from: 'Sam', subject: 'Notes from today', category: null },
+    { from: 'Best Buy', subject: '48 hour sale starts now', category: 'Promotions' },
+  ];
+  function playDemo(el) {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const people = SAMPLE.filter(m => !m.category).length;
+    function frame() {
+      el.innerHTML = renderBoxes([]) + `<div class="demo-summary" id="demoSummary">${SAMPLE.length} in your inbox. Sorting…</div>` +
+        SAMPLE.map((m, i) => `<div class="row" data-i="${i}"><div style="min-width:0;">
+          <div style="font-size:13px;font-weight:600;">${esc(m.from)}</div>
+          <div style="font-size:13px;">${esc(m.subject)}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:3px;"><span class="chip" style="border-color:var(--line);color:var(--sub);">Inbox</span></div>
+        </div></div>`).join('');
+    }
+    function done() { el.querySelector('#demoSummary').textContent = `Filed ${SAMPLE.length - people}. ${people} people stay. Nothing deleted.`; }
+    function run() {
+      frame();
+      const steps = SAMPLE.map((m, i) => [m, i]).filter(([m]) => m.category);
+      if (still) {
+        steps.forEach(([m, i]) => { el.querySelector(`[data-i="${i}"]`).remove(); const b = el.querySelector(`[data-box="${m.category}"]`); b.textContent = +b.textContent + 1; });
+        return done();
+      }
+      let k = 0;
+      const tick = () => {
+        if (k === steps.length) { done(); return setTimeout(run, 3200); }
+        const [m, i] = steps[k++];
+        const row = el.querySelector(`[data-i="${i}"]`);
+        const chip = row.querySelector('.chip');
+        chip.textContent = m.category; chip.removeAttribute('style');
+        setTimeout(() => {
+          row.classList.add('filing');
+          const b = el.querySelector(`[data-box="${m.category}"]`);
+          setTimeout(() => { row.remove(); b.textContent = +b.textContent + 1; b.parentNode.classList.remove('bump'); void b.offsetWidth; b.parentNode.classList.add('bump'); }, 450);
+        }, 500);
+        setTimeout(tick, 1100);
+      };
+      setTimeout(tick, 1200);
+    }
+    // only animate while on screen
+    if (still || !('IntersectionObserver' in window)) return run();
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { io.disconnect(); run(); } });
+    io.observe(el);
+  }
+
   function connectPicker() {
     body.innerHTML = `
+      <div id="autoDemo" aria-live="off"></div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
         <a class="btn" href="/auth/start">Connect Gmail</a>
         <a class="btn" id="outlookBtn" href="/auth/start/outlook" hidden>Connect Outlook</a>
@@ -273,6 +326,7 @@
         <button type="submit" class="btn">Connect</button>
         <p id="icloudErr" style="color:var(--accent);font-size:13px;margin:8px 0 0;"></p>
       </form>`;
+    playDemo(document.getElementById('autoDemo'));
     // Outlook only shows once the server says its sign-in is switched on
     fetch('/api/providers').then(r => r.json()).then(p => { if (p.outlook) document.getElementById('outlookBtn').hidden = false; }).catch(() => {});
     document.getElementById('demoBtn').addEventListener('click', async () => {

@@ -16,7 +16,7 @@ struct InboxView: View {
         NavigationStack {
             List {
                 if let error { Text(error).foregroundStyle(.red) }
-                if let note { Text(note).font(.footnote).foregroundStyle(.secondary) }
+                if let note { Text(note).font(.mb(.footnote)).foregroundStyle(.secondary) }
                 if loaded && messages.isEmpty {
                     Text("Inbox is clean. Nothing to triage.").foregroundStyle(.secondary)
                 }
@@ -60,10 +60,10 @@ struct InboxView: View {
 
     private func row(_ m: Message) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(m.sender).font(.subheadline.weight(.semibold)).foregroundStyle(m.isJunk ? Color.accentColor : .primary)
-            Text(m.subject ?? "(no subject)").font(.subheadline)
+            Text(m.sender).font(.mb(.subheadline, .semibold)).foregroundStyle(m.isJunk ? Color.accentColor : .primary)
+            Text(m.subject ?? "(no subject)").font(.mb(.subheadline))
             Text(m.isJunk ? "\(m.score) signals: \(m.reasons.joined(separator: ", "))" : (m.folder == nil ? "A person, stays put" : "Goes to \(m.folder!)"))
-                .font(.caption).foregroundStyle(.secondary)
+                .font(.mb(.caption)).foregroundStyle(.secondary)
         }
         .padding(.vertical, 2)
         .swipeActions(edge: .trailing) {

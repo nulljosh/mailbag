@@ -27,7 +27,7 @@ struct SimpleInboxView: View {
         VStack(spacing: 0) {
             headline.frame(height: 150)
             Text(caption)
-                .font(isZero ? .title.weight(.semibold) : .title2)
+                .font(isZero ? .mb(.title, .semibold) : .mb(.title2))
                 .foregroundStyle(isZero ? AnyShapeStyle(.primary) : AnyShapeStyle(.secondary))
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
@@ -35,7 +35,7 @@ struct SimpleInboxView: View {
             action.padding(.top, 28)
             if !line.isEmpty {
                 Text(line)
-                    .font(.callout).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                    .font(.mb(.callout)).foregroundStyle(.secondary).multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 20)
                     .accessibilityIdentifier("result")
@@ -72,7 +72,7 @@ struct SimpleInboxView: View {
                 .accessibilityIdentifier("zero")
         } else {
             Text("\((count ?? 0) + gmailLeft)")
-                .font(.system(size: 124, weight: .semibold)).monospacedDigit()
+                .font(.mbDisplay(124, .light)).monospacedDigit()
                 .contentTransition(.numericText())
                 .accessibilityIdentifier("count")
         }
@@ -110,7 +110,7 @@ struct SimpleInboxView: View {
     }
 
     private func bigButton(_ title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) { Text(title).font(.title3.weight(.semibold)).frame(width: 260, height: 32) }
+        Button(action: action) { Text(title).font(.mb(.title3, .semibold)).frame(width: 260, height: 32) }
             .controlSize(.extraLarge).buttonStyle(.borderedProminent)
             .keyboardShortcut(.defaultAction)
     }

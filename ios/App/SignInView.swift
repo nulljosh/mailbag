@@ -20,7 +20,7 @@ struct SignInView: View {
             #endif
         SecureField("App-specific password", text: $appPassword)
         Link("How to make an app-specific password", destination: URL(string: "https://support.apple.com/en-us/102654")!)
-            .font(.footnote)
+            .font(.mb(.footnote))
         Button("Sign in to iCloud") { Task { await session.icloud(email: email, appPassword: appPassword) } }
             .disabled(email.isEmpty || appPassword.isEmpty)
     }
@@ -30,8 +30,8 @@ struct SignInView: View {
         VStack(spacing: 0) {
             Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 96, height: 96)
                 .accessibilityHidden(true)
-            Text(appName).font(.system(size: 34, weight: .semibold)).padding(.top, 10)
-            Text("Inbox zero, one button.").font(.title3).foregroundStyle(.secondary).padding(.top, 4)
+            Text(appName.uppercased()).font(.mbDisplay(40, .medium)).tracking(2).padding(.top, 10)
+            Text("Inbox zero, one button.").font(.mb(.title3)).foregroundStyle(.secondary).padding(.top, 4)
 
             VStack(spacing: 10) {
                 wide("Continue with Gmail", prominent: true) { session.gmail() }
@@ -48,10 +48,10 @@ struct SignInView: View {
                 .accessibilityIdentifier("demo")
 
             if let error = session.error {
-                Text(error).font(.callout).foregroundStyle(.red).multilineTextAlignment(.center).padding(.top, 14)
+                Text(error).font(.mb(.callout)).foregroundStyle(.red).multilineTextAlignment(.center).padding(.top, 14)
             }
             Text(pitch + " " + aiNote)
-                .font(.footnote).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                .font(.mb(.footnote)).foregroundStyle(.secondary).multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 24)
         }
@@ -64,7 +64,7 @@ struct SignInView: View {
     }
 
     private func wide(_ title: String, prominent: Bool = false, action: @escaping () -> Void) -> some View {
-        let label = Text(title).font(.body.weight(prominent ? .semibold : .regular)).frame(width: 236, height: 22)
+        let label = Text(title).font(.mb(.body, prominent ? .semibold : .regular)).frame(width: 236, height: 22)
         return Group {
             if prominent {
                 Button(action: action) { label }.buttonStyle(.borderedProminent).keyboardShortcut(.defaultAction)

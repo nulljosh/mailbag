@@ -172,6 +172,13 @@ h3 { font-size: 30px; line-height: 32px; font-weight: 300; }
 .boxes span { display: block; font-family: var(--display); font-size: 12px; line-height: 16px; letter-spacing: .08em; text-transform: uppercase; color: var(--sub); margin-top: var(--sp-1); overflow: hidden; text-overflow: ellipsis; }
 .inbox .row { display: flex; justify-content: space-between; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--line); transition: opacity var(--motion); }
 .inbox .row:last-child { border-bottom: 0; }
+#autoDemo { margin-bottom: var(--sp-5); padding-bottom: var(--sp-5); border-bottom: 1px solid var(--line); }
+#autoDemo .row { overflow: hidden; max-height: 96px; }
+#autoDemo .row.filing { animation: file .45s ease forwards; }
+.demo-summary { font-size: 13px; color: var(--sub); margin-bottom: var(--sp-2); }
+.boxes li.bump { animation: bump .4s ease; }
+@keyframes file { to { opacity: 0; transform: translateY(-12px); max-height: 0; padding: 0; border-width: 0; } }
+@keyframes bump { 40% { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); } }
 .chip { display: inline-block; font-family: var(--display); font-size: 12px; line-height: 16px; letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--accent); color: var(--accent); padding: 0 6px; margin-right: var(--sp-2); border-radius: var(--r-sq); }
 .mini { height: 28px; padding: 0 var(--sp-3); border: 1px solid var(--line); border-radius: var(--r-sq); background: none; color: var(--text); font: inherit; font-size: 13px; cursor: pointer; transition: border-color var(--motion), color var(--motion); }
 .mini:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
@@ -187,3 +194,4 @@ h3 { font-size: 30px; line-height: 32px; font-weight: 300; }
 .privacy p { color: var(--sub); }
 .privacy a { color: var(--accent); }
 @media (max-width: 700px) { .boxes { grid-template-columns: repeat(4, 1fr); } .inbox .row { flex-direction: column; } #inboxBody { padding: var(--sp-4); } }
+[hidden] { display: none !important; }

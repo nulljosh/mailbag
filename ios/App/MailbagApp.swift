@@ -7,6 +7,25 @@ let brandBlue = Color(nsColor: NSColor(name: nil) { $0.bestMatch(from: [.darkAqu
 let brandBlue = Color(uiColor: UIColor { $0.userInterfaceStyle == .dark ? UIColor(red: 0.36, green: 0.56, blue: 0.94, alpha: 1) : UIColor(red: 0.12, green: 0.37, blue: 0.82, alpha: 1) })
 #endif
 
+/// Mailbag Sans for text, Mailbag Display (condensed caps face) for big numbers and the name, same as the landing.
+/// Sizes follow the platform's text styles and scale with Dynamic Type.
+extension Font {
+    static func mb(_ style: Font.TextStyle, _ weight: Font.Weight = .regular) -> Font {
+        .custom("Mailbag Sans", size: mbSize(style), relativeTo: style).weight(weight)
+    }
+    static func mbDisplay(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
+        .custom("Antonio", size: size).weight(weight)
+    }
+}
+
+private func mbSize(_ style: Font.TextStyle) -> CGFloat {
+    #if os(macOS)
+    switch style { case .title: 22; case .title2: 17; case .title3: 15; case .callout: 12; case .subheadline, .footnote: 11; case .caption: 10; default: 13 }
+    #else
+    switch style { case .title: 28; case .title2: 22; case .title3: 20; case .callout: 16; case .subheadline: 15; case .footnote: 13; case .caption: 12; default: 17 }
+    #endif
+}
+
 /// Launch flags are passed as `-name YES`. A bare `-name` swallows the next argument.
 func launchFlag(_ name: String) -> Bool { UserDefaults.standard.bool(forKey: name) }
 

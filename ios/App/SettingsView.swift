@@ -34,10 +34,10 @@ struct SettingsView: View {
                         }
                     } label: {
                         Text(r.name)
-                        Text(r.detail).font(.caption).foregroundStyle(.secondary)
+                        Text(r.detail).font(.mb(.caption)).foregroundStyle(.secondary)
                     }
                 }
-                if let error = session.error { Text(error).font(.caption).foregroundStyle(.red) }
+                if let error = session.error { Text(error).font(.mb(.caption)).foregroundStyle(.red) }
             }
             Section {
                 Toggle("Smart sorting", isOn: $aiSort)
