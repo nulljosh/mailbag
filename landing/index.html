@@ -22,6 +22,7 @@
 <meta name="twitter:image" content="https://mailbag.jaybulb.com/og.png">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="landing.css">
+<link rel="stylesheet" href="hero.css?v=2">
 <script src="landing.js" defer></script>
 </head>
 <body>
@@ -44,6 +45,7 @@
      (Naples); Velazquez, Mercury and Argus (Prado). Every image is used once. -->
 <main id="top">
 <section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true" inert><div class="mwall" id="mwall"></div></div>
   <div class="wrap center hero-copy">
     <p class="label">Sisyphus never got here</p>
     <h1>Inbox zero, one button</h1>
@@ -55,11 +57,14 @@
     <p class="fine">Web, iPhone and Mac. Gmail and iCloud.</p>
   </div>
 
+</section>
+
+<section class="try" id="try">
   <div class="demo-wrap reveal">
     <div class="stage">
       <div class="art stage-art" style="--img: url(art/sisyphus.png)" aria-hidden="true"></div>
       <div class="inbox" id="inbox" role="region" aria-label="Your inbox, live">
-        <div class="inbox-head"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><p class="label">Your inbox</p></div>
+        <div class="inbox-head"><p class="label">Your inbox</p></div>
         <div id="inboxBody"></div>
       </div>
     </div>
@@ -138,6 +143,7 @@
 </footer>
 
 <script src="footer-band.js" defer></script>
+<script src="hero.js?v=2" defer></script>
 <script>
 // inbox: real triage, gated on a connected session (cookie for web, ?token= for native).
 (function(){
