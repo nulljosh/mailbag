@@ -347,7 +347,11 @@
     });
   }
 
-  fetch('/api/messages', { headers: authHeaders, credentials: 'include' }).then(r => {
+  fetch('/api/session', { headers: authHeaders, credentials: 'include' }).then(r => r.json()).catch(() => ({ in: false })).then(s => {
+    if (!s.in) { connectPicker(); return; }
+    return fetch('/api/messages', { headers: authHeaders, credentials: 'include' });
+  }).then(r => {
+    if (!r) return;
     if (r.status === 401) { connectPicker(); return; }
     if (!r.ok) { body.innerHTML = '<p style="margin:0;color:var(--muted);font-size:14px;">Could not load inbox.</p>'; return; }
     return r.json().then(render);

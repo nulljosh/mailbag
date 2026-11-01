@@ -684,6 +684,11 @@ export default {
       }
     }
 
+    // the landing asks this first, so a signed-out visit never logs a 401
+    if (pathname === "/api/session" && request.method === "GET") {
+      return Response.json({ in: !!(await getSession(env, sessionIdFromRequest(request))) });
+    }
+
     if (pathname === "/api/messages" && request.method === "GET") {
       const id = sessionIdFromRequest(request);
       let session = await getSession(env, id);
