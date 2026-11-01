@@ -24,6 +24,11 @@ private func mbSize(_ style: Font.TextStyle) -> CGFloat {
     #endif
 }
 
+#if os(macOS)
+/// The one Mac window never resizes; sign-in (the taller screen, with the iCloud fields open) sets the height.
+let macWindowSize = CGSize(width: 440, height: 640)
+#endif
+
 /// Launch flags are passed as `-name YES`. A bare `-name` swallows the next argument.
 func launchFlag(_ name: String) -> Bool { UserDefaults.standard.bool(forKey: name) }
 
@@ -41,6 +46,9 @@ struct RootView: View {
                 #endif
             }
         }
+        #if os(macOS)
+        .frame(width: macWindowSize.width, height: macWindowSize.height)
+        #endif
         .tint(brandBlue)
         .font(.mb(.body))
         // `-dark YES` forces dark mode for screenshots
@@ -107,8 +115,11 @@ final class MacWindow: NSObject, NSApplicationDelegate {
     func show() {
         if window == nil {
             let host = NSHostingController(rootView: RootView().environmentObject(Session.shared))
-            host.sizingOptions = [.preferredContentSize] // the window is exactly as big as its content
+            // ponytail: fixed size. Letting the window follow the content (sizingOptions .preferredContentSize) crashed
+            // App Review on macOS 27 when sign-in swapped to the inbox: the resize re-entered layout until AppKit threw.
+            host.sizingOptions = []
             let w = NSWindow(contentViewController: host)
+            w.setContentSize(macWindowSize)
             w.styleMask = [.titled, .closable, .miniaturizable, .fullSizeContentView]
             w.titlebarAppearsTransparent = true
             w.titleVisibility = .hidden

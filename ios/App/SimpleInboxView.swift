@@ -42,7 +42,7 @@ struct SimpleInboxView: View {
             }
         }
         .padding(.horizontal, 48).padding(.top, 52).padding(.bottom, 56)
-        .frame(width: 440)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(paper.ignoresSafeArea())
         .overlay(alignment: .bottomTrailing) {
             SettingsLink { Image(systemName: "gearshape").font(.title3) }
@@ -52,7 +52,6 @@ struct SimpleInboxView: View {
         }
         // Cmd-R checks again without a visible control
         .background(Button("Check again") { Task { await load() } }.keyboardShortcut("r").opacity(0).accessibilityHidden(true))
-        .fixedSize(horizontal: false, vertical: true)
         .task(id: session.token) { await load() }
         .onChange(of: aiSort) { Task { await load() } }
         .onChange(of: session.gmailTokens) { Task { await load() } }
